@@ -39,7 +39,7 @@ namespace EmployeeManagement.API.Controllers
             }
         }
 
-        private object MapToEmployee(EmployeeDto employee)
+        private EmployeeDetailedViewModel MapToEmployee(EmployeeDto employee)
         {
             var employeeById = new EmployeeDetailedViewModel()
             {
@@ -58,7 +58,7 @@ namespace EmployeeManagement.API.Controllers
         public IActionResult GetEmployees()
         {
             /// get employees by calling GetEmployees() in IEmployeeService and store it in a variable and Map that variable to EmployeeDetailedViewModel. 
-            /// 
+           
             try
             {
 

@@ -1,7 +1,69 @@
 ﻿@model IEnumerable<EmployeeViewModel>
 
 <h3 class="display-4">Employees</h3>
-<button class="btn btn-success"> Create New Employee</button>
+<button class="btn btn-success" data-toggle="modal" data-target="#myModal"> Create New Employee</button>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Employee Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="createform">
+                    <label>Name:</label><br>
+                    <input type="text" style="width:100%" id="name" name="name"/><br />
+                    <label>Department:</label><br />
+                    <select name="Department" id="dept" style="width:100%">
+                        <option value="Finance">Finance</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Testing">Testing</option>
+                    </select><br />
+                    @*<input type="text" style="width:100%" id="dept" name="department"/><br />*@
+                    <label>Age:</label><br />
+                    <input type="number" style="width:100%" id="age" name="age"/><br />
+                    <label>Address:</label><br />
+                    <input type="text" style="width:100%" id="address" name="address"/><br /><br /><br />
+                    <input type="submit" value="create" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="example" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Update Employee Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="updateform">
+                    <label>ID:</label><br />
+                    <input type="number" style="width:100%" id="id" name="id" /><br />
+                    <label>Name:</label><br>
+                    <input type="text" style="width:100%" id="names" name="name" /><br />
+                    <label>Department:</label><br />
+                    <select name="Department" id="department" style="width:100%">
+                        <option value="Finance">Finance</option>
+                        <option value="Developer">Developer</option>
+                        <option value="Testing">Testing</option>
+                    </select><br />
+                   
+                    <label>Age:</label><br />
+                    <input type="number" style="width:100%" id="ages" name="age" /><br />
+                    <label>Address:</label><br />
+                    <input type="text" style="width:100%" id="addres" name="address" /><br /><br /><br />
+                    <input type="submit" value="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -26,8 +88,10 @@
             <td>@employee.Name</td>
             <td>@employee.Department</td>
             <td>
+                
                 <button class="btn btn-primary employeeDetails" data-id="@employee.Id"> Details</button>
-                <button class="btn btn-info employeeEdit" data-id="@employee.Id"> Edit</button>
+                <button class="btn btn-info employeeEdit" data-id="@employee.Id" data-toggle="modal" data-target="#example"> Edit</button>
+
                 <button class="btn btn-danger employeeDelete" data-id="@employee.Id"> Delete</button>
             </td>
         </tr>

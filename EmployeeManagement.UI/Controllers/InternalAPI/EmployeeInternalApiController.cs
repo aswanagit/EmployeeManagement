@@ -38,6 +38,56 @@ namespace EmployeeManagement.UI.Controllers.InternalAPI
 
         }
 
-        
+        [HttpPost]
+        [Route("insert")]
+
+        public IActionResult InsertEmployee([FromBody] EmployeeDetailedViewModel employees)
+        {
+            try
+            {
+                var employee = _employeeApiClient.InsertEmployee(employees);
+                return Ok(employee);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        [Route("{employeeId}")]
+        public IActionResult DeleteEmployee([FromRoute] int employeeId)
+        {
+            try
+            {
+                var employee = _employeeApiClient.DeleteEmployee(employeeId);
+
+                return Ok(employee);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPut]
+        [Route("update")]
+
+        public IActionResult UpdateEmployee([FromBody] EmployeeDetailedViewModel employee)
+        {
+            try
+            {
+                var employe = _employeeApiClient.UpdateEmployee(employee);
+                return Ok(employe);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }
