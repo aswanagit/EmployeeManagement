@@ -13,19 +13,21 @@
             <div class="modal-body">
                 <form id="createform">
                     <label>Name:</label><br>
-                    <input type="text" style="width:100%" id="name" name="name"/><br />
+                    <input type="text" style="width:100%" required id="name" name="name" pattern="[A-Za-z\s\.]{1,15}" maxlength="15" placeholder="Enter the Name"/><br />
                     <label>Department:</label><br />
-                    <select name="Department" id="dept" style="width:100%">
+                    <select name="Department" required id="dept" style="width:100%">
+                        <option value="">--Choose an Option--</option>
                         <option value="Finance">Finance</option>
                         <option value="Developer">Developer</option>
                         <option value="Testing">Testing</option>
                     </select><br />
                     @*<input type="text" style="width:100%" id="dept" name="department"/><br />*@
                     <label>Age:</label><br />
-                    <input type="number" style="width:100%" id="age" name="age"/><br />
+                    <input type="number" style="width:100%" required id="age" name="age" min="18" max="50" placeholder="Enter the Age"/><br />
                     <label>Address:</label><br />
-                    <input type="text" style="width:100%" id="address" name="address"/><br /><br /><br />
-                    <input type="submit" value="create" />
+                    <input type="text" style="width:100%" required id="address" name="address" pattern="[A-Za-z\s\,]{1-30}" maxlength="30" placeholder="Enter the Address"/><br /><br /><br />
+                    <input type="submit" value="Create" class="btn btn-success" />
+                   
                 </form>
             </div>
         </div>
@@ -43,28 +45,29 @@
             <div class="modal-body">
                 <form id="updateform">
                     <label>ID:</label><br />
-                    <input type="number" style="width:100%" id="id" name="id" /><br />
+                    <input type="number" style="width:100%" id="id" name="id" disabled /><br />
                     <label>Name:</label><br>
-                    <input type="text" style="width:100%" id="names" name="name" /><br />
+                    <input type="text" style="width:100%" id="names" name="name" required pattern="[A-Za-z\s]{1,15}" maxlength="15" /><br />
                     <label>Department:</label><br />
-                    <select name="Department" id="department" style="width:100%">
+                    <select name="Department" id="department" style="width:100%" required>
+                         <option value="">--Choose an Option--</option>
                         <option value="Finance">Finance</option>
                         <option value="Developer">Developer</option>
                         <option value="Testing">Testing</option>
                     </select><br />
                    
                     <label>Age:</label><br />
-                    <input type="number" style="width:100%" id="ages" name="age" /><br />
+                    <input type="number" style="width:100%" id="ages" name="age" required min="18" max="50" /><br />
                     <label>Address:</label><br />
-                    <input type="text" style="width:100%" id="addres" name="address" /><br /><br /><br />
-                    <input type="submit" value="submit" />
+                    <input type="text" style="width:100%" id="addres" name="address" required pattern="[A-Za-z\s\,]{1-9}" maxlength="30"/><br /><br /><br />
+                    <input type="submit" value="Update" class="btn btn-primary" />
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<table class="table table-bordered">
+<table class="table table-bordered" >
     <thead>
         <tr>
             <td>

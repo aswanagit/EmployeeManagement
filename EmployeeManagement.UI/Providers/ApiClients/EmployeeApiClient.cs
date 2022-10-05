@@ -46,7 +46,7 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             var stringContent = new StringContent(JsonConvert.SerializeObject(employee),Encoding.UTF8,"application/json");
             using (var response = _httpClient.PostAsync("https://localhost:5001/api/insert", stringContent).Result)
             {
-                response.Content.ReadAsStringAsync();
+                //response.Content.ReadAsStringAsync();
                 return true;
             }
                 
@@ -57,7 +57,7 @@ namespace EmployeeManagement.UI.Providers.ApiClients
             var stringContent = new StringContent(JsonConvert.SerializeObject(employee),Encoding.UTF8,"application/json");
             using (var response = _httpClient.PutAsync("https://localhost:5001/api/update", stringContent).Result)
             {
-                response.Content.ReadAsStringAsync();
+                //response.Content.ReadAsStringAsync();
                 return true;
             }
         }
