@@ -29,15 +29,16 @@ namespace TestProject
         public void GetEmployeeById_ReturnSuccess()
         {
             //Arrange
-            _mockEmployeeService.Setup(m => m.GetEmployeeById(1)).Returns(GetDummyEmployeeSuccess());
+            _mockEmployeeService.Setup(m => m.GetEmployeeById(It.IsAny<int>())).Returns(GetDummyEmployeeSuccess());
 
             //Act
             var result=_employeeApiController.GetEmployeeById(1) as OkObjectResult;
-
+            
+            
             //Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Value);
             Assert.IsTrue(result.StatusCode == StatusCodes.Status200OK);
-            Assert.AreEqual(result.StatusCode, StatusCodes.Status200OK);
+            //Assert.AreEqual(result.Value, StatusCodes.Status200OK);
         }
 
         [TestMethod]
@@ -51,14 +52,14 @@ namespace TestProject
             var result = _employeeApiController.GetEmployeeById(2) as ObjectResult;
 
             //Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.StatusCode == StatusCodes.Status500InternalServerError);
-            Assert.AreEqual(result.StatusCode, StatusCodes.Status500InternalServerError);
+            
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status404NotFound);
+            //Assert.AreEqual(result.StatusCode, StatusCodes.Status404NotFound);
         }
 
         [TestMethod]
 
-        public void GetEmployeeById_ReturnNegative()
+        public void GetEmployeeById_ReturnBadRequest()
         {
             //Act
             var result = _employeeApiController.GetEmployeeById(-2) as ObjectResult;
@@ -80,7 +81,7 @@ namespace TestProject
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.StatusCode == StatusCodes.Status200OK);
+            //Assert.IsTrue(result.StatusCode == StatusCodes.Status200OK);
             Assert.AreEqual(result.StatusCode, StatusCodes.Status200OK);
         }
 
@@ -95,9 +96,9 @@ namespace TestProject
             var result = _employeeApiController.GetEmployees() as ObjectResult;
 
             //Assert
-            Assert.IsNotNull(result);
+            //Assert.IsNotNull(result);
             Assert.IsTrue(result.StatusCode == StatusCodes.Status500InternalServerError);
-            Assert.AreEqual(result.StatusCode, StatusCodes.Status500InternalServerError);
+            //Assert.AreEqual(result.StatusCode, StatusCodes.Status500InternalServerError);
         }
 
         [TestMethod]
@@ -105,7 +106,7 @@ namespace TestProject
         public void InsertEmployee_ReturnSuccess()
         {
             //Arrange
-            _mockEmployeeService.Setup(m => m.InsertEmployee(new EmployeeDto())).Returns(true);
+            _mockEmployeeService.Setup(m => m.InsertEmployee(It.IsAny<EmployeeDto>())).Returns(true);
 
             //Act
             var result = _employeeApiController.InsertEmployee(new EmployeeDetailedViewModel()) as OkObjectResult;
@@ -116,20 +117,50 @@ namespace TestProject
            
         }
 
-        //[TestMethod]
+        [TestMethod]
 
-        //public void InsertEmployee_ReturnNull()
-        //{
-        //    //Arrange
-        //    _mockEmployeeService.Setup(m => m.InsertEmployee(new EmployeeDto())).Returns(false);
+        public void InsertEmployee_ReturnNull()
+        {
+            //Arrange
+            _mockEmployeeService.Setup(m => m.InsertEmployee(new EmployeeDto())).Returns(false);
 
-        //    //Act
-        //    var result = _employeeApiController.InsertEmployee(new EmployeeDetailedViewModel()) as ObjectResult;
+            //Act
+            var result = _employeeApiController.InsertEmployee(new EmployeeDetailedViewModel()) as ObjectResult;
 
-        //    //Assert
-        //    Assert.IsNotNull(result);
-        //    Assert.IsTrue(result.StatusCode == StatusCodes.Status500InternalServerError);
-        //}
+            //Assert
+            //Assert.IsNotNull(result);
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status500InternalServerError);
+        }
+
+        [TestMethod]
+
+        public void UpdateEmployee_ReturnSuccess()
+        {
+            //Arrange
+            _mockEmployeeService.Setup(m => m.UpdateEmployee(It.IsAny<EmployeeDto>())).Returns(true);
+
+            //Act
+            var result = _employeeApiController.UpdateEmployee(new EmployeeDetailedViewModel()) as OkObjectResult;
+
+            //Assert
+            Assert.IsNotNull(result.Value);
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status200OK);
+        }
+
+        [TestMethod]
+
+        public void UpdateEmployee_ReturnNull()
+        {
+            //Arrange
+            _mockEmployeeService.Setup(m => m.UpdateEmployee(new EmployeeDto())).Returns(false);
+
+            //Act
+            var result= _employeeApiController.UpdateEmployee(new EmployeeDetailedViewModel()) as ObjectResult;
+
+            //Assert
+            Assert.IsTrue(result.StatusCode == StatusCodes.Status500InternalServerError);
+
+        }
 
         [TestMethod]
 
@@ -148,7 +179,7 @@ namespace TestProject
 
         [TestMethod]
 
-        public void DeleteEmployee_ReturnNegative()
+        public void DeleteEmployee_ReturnBadRequest()
         {
             //_mockEmployeeService.Setup(m => m.DeleteEmployee(5)).Returns(false);
 
@@ -178,7 +209,16 @@ namespace TestProject
 
         private EmployeeDto GetDummyEmployeeSuccess()
         {
-            return new EmployeeDto();
+            var employee = new EmployeeDto()
+            {
+                Id=4,
+                Name="Arun",
+                Age = 24,
+                Address="Calicut",
+                Department="Testing"
+            };
+            return employee;
+            
         }
         private EmployeeDto GetDummyEmployeeNull()
         {

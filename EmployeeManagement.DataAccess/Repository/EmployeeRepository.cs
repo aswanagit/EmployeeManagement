@@ -157,8 +157,13 @@ namespace EmployeeManagement.DataAccess.Repository
 
                 sqlCommand.Parameters.AddWithValue("id", id);
 
-                sqlCommand.ExecuteNonQuery();
-                return true;
+                var response= sqlCommand.ExecuteNonQuery();
+                if (response > 0)
+                {
+                    return true;
+                }
+                return false;
+                
             }
             catch(Exception ex)
             {
